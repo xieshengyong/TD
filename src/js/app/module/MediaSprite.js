@@ -5,17 +5,19 @@ todo: 1、2、3优先，4、5次优先
              3、根据传入的时间帧自动转换为时间单位；
              4、给根节点添加事件，自动触发视频播放功能；
              5、监测视频异常暂停，弹出加载中的提示，缓冲完再次播放时移除提示；
+
+    特点： 1、 参考腾讯MMD.VideoPlayer的初始化，集中简化timeline
  */
 
 export default class MediaSprite {
     /**
      * 雪碧媒体库
      * @param {*} element media的父元素节点
-     * @param {string} src media的地址
-     * @param {object} timeline 视频片段的时间线，例如
+     * @param {string} src media的URL
+     * @param {object} timeline 视频片段的时间线，片段名称和入点与出点集合的键值对（集合入点可缺省， 为字符串时仅表示出点）
      * {
-     *  first: [0, 10.2],
-     *  second: [10.2, 11.2]
+     *  first: 10.2,
+     *  second: [11, 12.1]
      * }
      */
     constructor (element, src, timeline) {
