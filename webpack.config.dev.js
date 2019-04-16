@@ -1,5 +1,8 @@
-/**
- * Created by z on 2017/6/5.
+/*
+ * @Author: z
+ * @Date: 2017-06-05 11:29:16
+ * @Last Modified by: xieshengyong
+ * @Last Modified time: 2019-01-02 11:34:27
  */
 const path = require('path');
 const webpack = require('webpack');
@@ -24,18 +27,48 @@ module.exports = function (env) {
             rules: [
                 {
                     test: /\.less$/,
-                    use: ['style-loader', 'css-loader', 'postcss-loader', 'less-loader'],
-                    exclude: /(node_modules|bower_components)/,
-                },
-                {
-                    test: /\.css$/,
-                    use: ['postcss-loader'],
-                    exclude: /(node_modules|bower_components)/,
+                    include: [
+                        path.resolve(__dirname, 'src/less')
+                    ],
+                    use: [
+                        {
+                            loader: 'style-loader',
+                            options: {}
+                        },
+                        {
+                            loader: 'css-loader',
+                            options: {}
+                        },
+                        {
+                            loader: 'postcss-loader',
+                            options: {}
+                        },
+                        {
+                            loader: 'less-loader',
+                            options: {}
+                        }
+                    ]
                 },
                 {
                     test: /\.js$/,
-                    exclude: /(node_modules|dist|lib|fx_methods)/,
-                    use: ['babel-loader?cacheDirectory', 'eslint-loader']
+                    include: [
+                        path.resolve(__dirname, 'src/js')
+                    ],
+                    exclude: [
+                        path.resolve(__dirname, 'src/js/lib'),
+                        path.resolve(__dirname, 'src/js/util')
+                    ],
+                    use: [
+                        {
+                            loader: 'babel-loader',
+                            options: {
+                                cacheDirectory: true
+                            }
+                        },
+                        {
+                            loader: 'eslint-loader'
+                        }
+                    ]
                 }
             ]
         },
@@ -50,7 +83,7 @@ module.exports = function (env) {
         ],
         devServer: {
             host: '0.0.0.0',
-            contentBase: path.join(__dirname, './'),
+            contentBase: [path.join(__dirname, './*.ejs'), path.join(__dirname, './src/')],
             compress: true,
             // port: 3000,
             inline: true,

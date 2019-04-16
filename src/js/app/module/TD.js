@@ -376,6 +376,14 @@ TD.util.getCookie = function (name) {
     return '';
 };
 
+// todo: webpack-strip 不能去除TD.debug.xx(function () {}) 与 TD.debug.xx()形式, 函数回掉不要用匿名函数
+/*
+  例：
+  let jumpCallback = function () {};
+
+  TD.debug.jump(jumpCallback)
+
+ */
 /*
 debug工具包
 */
@@ -426,19 +434,25 @@ TD.debug.log = function (info, num) {
  _video.currentTime = 100;
  })
  */
-TD.debug.jump = function (callback) {
-    $('body').one('doubleTap', function (e) {
-        var data = new Date().getTime();
-        $('body').one('swipeLeft', function (e) {
-            $('body').one('swipeLeft', function (e) {
-                if ((new Date().getTime() - data) > 2000) {
-                    return false;
-                } else {
-                    callback && callback();
-                }
-            });
-        });
-    });
+
+TD.debug.jump = function (name, callback) {
+    callback && callback();
+    // $('body').one('doubleTap', function (e) {
+    //     var data = new Date().getTime();
+    //     $('body').one('swipeLeft', function (e) {
+    //         $('body').one('swipeLeft', function (e) {
+    //             if ((new Date().getTime() - data) > 2000) {
+    //                 return false;
+    //             } else {
+    //                 callback && callback();
+    //             }
+    //         });
+    //     });
+    // });
+};
+
+TD.debug.videoJump = function () {
+    return 'test';
 };
 
 // cnzz事件统计
@@ -471,10 +485,6 @@ TD.browser = {
     versions: (function () {
         var u = navigator.userAgent;
         return {
-            trident: u.indexOf('Trident') > -1 || u.indexOf('NET CLR') > -1, // IE内核
-            presto: u.indexOf('Presto') > -1, // opera内核
-            webKit: u.indexOf('AppleWebKit') > -1, // 苹果、谷歌内核
-            gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') === -1, // 火狐内核
             mobile: !!u.match(/AppleWebKit.*Mobile.*/), // 移动终端
             Tablet: u.indexOf('Tablet') > -1 || u.indexOf('Pad') > -1 || u.indexOf('Nexus 7') > -1, // 平板
             ios: u.indexOf('like Mac OS X') > -1, // ios终端
