@@ -4,14 +4,14 @@ import Config from './Config.js';
 // 项目初始化的一些函数
 var initProject = function () {
     // cnzz统计代码 强制HTTPS，防劫持
-    (function () {
-        var cnzzID = Config.defShare.cnzz;
-        document.write(unescape('%3Cspan id="cnzz_stat_icon_' + cnzzID + '"%3E%3C/span%3E%3Cscript src="' + 'https://s4.cnzz.com/z_stat.php%3Fid%3D' + cnzzID + '" type="text/javascript"%3E%3C/script%3E'));
-        $('#cnzz_stat_icon_' + cnzzID).hide();
-    })();
+    // (function () {
+    //     var cnzzID = Config.defShare.cnzz;
+    //     document.write(unescape('%3Cspan id="cnzz_stat_icon_' + cnzzID + '"%3E%3C/span%3E%3Cscript src="' + 'https://s4.cnzz.com/z_stat.php%3Fid%3D' + cnzzID + '" type="text/javascript"%3E%3C/script%3E'));
+    //     $('#cnzz_stat_icon_' + cnzzID).hide();
+    // })();
 
-    // 初始化微信接口
-    TD.initWxApi(Config.defShare);
+    // // 初始化微信接口
+    // TD.initWxApi(Config.defShare);
 
     // 阻止微信下拉；原生js绑定覆盖zepto的默认绑定
     document.body.addEventListener('touchmove', function (e) {

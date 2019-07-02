@@ -15,4 +15,6 @@ XXX-项目描述
     $ npm run dev
 ```
 
+参考：Browserslist：https://juejin.im/post/5b8cff326fb9a019fd1474d6
+
 

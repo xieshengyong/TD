@@ -30,7 +30,7 @@ Config.pageImgs = {
     imgs: [
         {
             name: 'test',
-            url: require('../../media/test_audio.mp3')
+            url: require('../../img/1.png')
         },
         {
             name: 'test2',

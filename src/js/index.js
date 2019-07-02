@@ -5,12 +5,13 @@
 *  复制到相应的文件夹
 *  引入的less会对less进行编译存放到css文件夹
 * */
-import '../less/style.less';
+import 'zepto/src/zepto';
+import 'zepto/src/event';
+import 'zepto/src/fx';
+import 'zepto/src/fx_methods';
 
-/** The animate() method */
-import './util/fx';
-/** Animated show, hide, toggle, and fade*() methods. */
-import './util/fx_methods';
+import 'howler';
+import * as PIXI from 'pixi.js'
 
 // 引入的包根据实际情况而定
 import LoadViewController from './app/LoadViewController';
@@ -32,6 +33,11 @@ var init = function () {
         loadView.onhide = indexPageBack;
 
         loadView.load();
+
+        const qqq = (params) => {
+            console.log(7);
+        }
+        qqq();
     };
 
     // index页面
