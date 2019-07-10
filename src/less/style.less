@@ -1,23 +1,54 @@
+/* rem，vw，vh使用注意 
+
+1、IE9-10伪类不支持rem
+2、iOS8及以上全线支持vw, vh, vmin, vmax
+3、IE9及以上支持vw，vh，不支持vmax，vmin
+4、Android4.4以上全线支持
+
+*/
+
 @import "reset.less";
 @import "keyframe.less";
 @import "common.less";
 
 @img: '../img/';
 
-html, body {
+/* 兼容不支持vmin的设备---start */
+html {
+    font-size: 50PX;
+}
+@media screen and (max-width: 767px) and (min-width: 414px) {
+    html {
+        font-size: 55.2PX;
+    };
+}
+/* 兼容不支持vmin的设备---end */
+
+/* 设计稿750px对应100vw 倍率100 */
+html {
+    font-size: 13.3333333333333vw;
+}
+
+/* 兼容iPad及PC，不至于过大 */
+@media all and (orientation: portrait) and (min-width: 767px) {
+    html {
+        font-size: 50PX;
+    }
+}
+
+body {
+    -webkit-user-select: none;
+    user-select: none;
     width: 100%;
     height: 100%;
     overflow: hidden;
-    background: #000;
-    font-size: 14px;
-    -webkit-user-select: none;
-    user-select: none;
+    // background: #000;
+    font-size: 24px;
 }
 
 // 横竖屏布局相关，慎删；
 .m-vertical {
     // display: none;
-    -webkit-transform-origin: center center;
     transform-origin: center center;
     .m-wrap {
         width: 100vw;
@@ -29,35 +60,34 @@ html, body {
 
 // 横竖屏布局相关，慎删；
 .m-horizontal {
-    display: none;
-    -webkit-transform-origin: center center;
+    .hide;
     transform-origin: center center;
-    -webkit-transform: rotate(90deg);
     transform: rotate(90deg);
     .m-wrap {
         width: 100vh;
         height: 100vw;
+        overflow: hidden;
         background-image: url('@{img}2.png');
     }
 }
 
-
-// 横竖屏布局相关，慎删；
-@media all and (orientation: landscape) {
-    .m-horizontal {
-        -webkit-transform: rotate(0deg);
-        transform: rotate(0deg);
-        .m-wrap {
-            width: 100vw;
-            height: 100vh;
-        }
-    }
+// 横屏
+[data-orient="landscape"] {
+    font-size: 13.3333333333333vh;
     .m-vertical {
-        -webkit-transform: rotate(-90deg);
+        .ol;
         transform: rotate(-90deg);
         .m-wrap {
             width: 100vh;
             height: 100vw;
+        }
+    }
+    .m-horizontal {
+        transform: rotate(0deg);
+        .ol;
+        .m-wrap {
+            width: 100vw;
+            height: 100vh;
         }
     }
 }

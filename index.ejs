@@ -14,10 +14,14 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     
     <!-- rem布局初始化设置start -->
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
         <%= require('raw-loader!./src/js/app/rem.js') %>
-    </script>
+    </script> -->
     <!-- rem布局初始化设置end -->
+
+    <script type="text/javascript">
+        <%= require('raw-loader!./src/js/app/module/Orient.js') %>
+    </script>
 
     <% if (process.env.NODE_ENV === 'handover') { %>
         <% for (var css in htmlWebpackPlugin.files.css) { %>
@@ -38,7 +42,7 @@
     <div class="m-main-wrap absf">
 
         <!-- 可删除 start -->
-        <button style="position: absolute;z-index: 2;top: 40%;left: 20%;" onclick="document.querySelector('.m-vertical').style.display='block';document.querySelector('.m-horizontal').style.display='none'">竖屏显示</button>
+        <input style="position: absolute;z-index: 2;top: 40%;left: 20%;" onclick="document.querySelector('.m-vertical').style.display='block';document.querySelector('.m-horizontal').style.display='none'">竖屏显示</input>
         <button style="position: absolute;z-index: 2;right: 20%;top: 40%;" onclick="document.querySelector('.m-vertical').style.display='none';document.querySelector('.m-horizontal').style.display='block'">横屏显示</button>
         <!-- 可删除 end -->
         
