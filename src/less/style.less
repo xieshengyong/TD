@@ -1,23 +1,20 @@
 /* rem，vw，vh使用注意 
 
-1、IE9-10伪类不支持rem
+1、IE9及以上支持rem，但9-10伪类不支持rem
 2、iOS8及以上全线支持vw, vh, vmin, vmax
 3、IE9及以上支持vw，vh，不支持vmax，vmin
 4、Android4.4以上全线支持
 
 */
-
 @import "reset.less";
 @import "keyframe.less";
 @import "common.less";
 
-@img: '../img/';
-
-/* 兼容不支持vmin的设备---start */
+/* 兼容不支持vw的设备---start */
 html {
     font-size: 50PX;
 }
-@media screen and (max-width: 767px) and (min-width: 414px) {
+@media screen and (max-width: 768px) and (min-width: 414px) {
     html {
         font-size: 55.2PX;
     };
@@ -27,22 +24,15 @@ html {
 /* 设计稿750px对应100vw 倍率100 */
 html {
     font-size: 13.3333333333333vw;
-}
-
-/* 兼容iPad及PC，不至于过大 */
-@media all and (orientation: portrait) and (min-width: 767px) {
-    html {
-        font-size: 50PX;
-    }
+    -webkit-user-select: none;
+    user-select: none;
 }
 
 body {
-    -webkit-user-select: none;
-    user-select: none;
     width: 100%;
     height: 100%;
     overflow: hidden;
-    // background: #000;
+    background: #000;
     font-size: 24px;
 }
 
@@ -54,7 +44,13 @@ body {
         width: 100vw;
         height: 100vh;
         overflow: hidden;
-        background-image: url('@{img}1.png');
+        &:after{
+            .dsz;
+            .sizcont;
+            .abcter;
+            content: '';
+            background-image: url('../img/1.png');
+        }
     }
 }
 
@@ -67,7 +63,14 @@ body {
         width: 100vh;
         height: 100vw;
         overflow: hidden;
-        background-image: url('@{img}2.png');
+        &:after{
+            width: 1600px;
+            height: 750px;
+            .sizcont;
+            .abcter;
+            content: '';
+            background-image: url('../img/2.png');
+        }
     }
 }
 
@@ -75,7 +78,6 @@ body {
 [data-orient="landscape"] {
     font-size: 13.3333333333333vh;
     .m-vertical {
-        .ol;
         transform: rotate(-90deg);
         .m-wrap {
             width: 100vh;
@@ -84,7 +86,6 @@ body {
     }
     .m-horizontal {
         transform: rotate(0deg);
-        .ol;
         .m-wrap {
             width: 100vw;
             height: 100vh;
