@@ -2,7 +2,7 @@
  * @Author: z
  * @Date: 2017-06-05 11:29:16
  * @Last Modified by: xieshengyong
- * @Last Modified time: 2019-05-24 22:01:15
+ * @Last Modified time: 2019-07-11 23:31:29
  */
 const path = require('path');
 // const webpack = require('webpack');
@@ -24,7 +24,8 @@ if (fs.existsSync('src/img/kf')) {
 module.exports = function () {
     return {
         entry: {
-            main: './src/js/index.js'
+            vendor: './src/js/vendor.js',
+            index: './src/js/index.js'
         },
         module: {
             rules: [

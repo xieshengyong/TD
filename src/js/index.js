@@ -8,9 +8,9 @@
 import '../less/style.less';
 
 /** The animate() method */
-import './util/fx';
+// import './util/fx';
 /** Animated show, hide, toggle, and fade*() methods. */
-import './util/fx_methods';
+// import './util/fx_methods';
 
 // 引入的包根据实际情况而定
 import LoadViewController from './app/LoadViewController';
@@ -28,10 +28,9 @@ var init = function () {
         pagePool.loadView = pagePool.loadView || new LoadViewController();
 
         var loadView = pagePool.loadView;
-        loadView.show();
         loadView.onhide = indexPageBack;
 
-        loadView.load();
+        loadView.show();
     };
 
     // index页面

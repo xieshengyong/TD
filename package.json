@@ -51,5 +51,11 @@
         "webpack-merge": "^4.1.0",
         "webpack-strip": "^0.1.0",
         "zip-webpack-plugin": "^2.1.0"
+    },
+    "dependencies": {
+        "gsap": "^2.1.2",
+        "howler": "^2.1.2",
+        "pixi.js": "^5.0.4",
+        "zepto": "^1.2.0"
     }
 }

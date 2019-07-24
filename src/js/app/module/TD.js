@@ -606,7 +606,7 @@ TD.browser = {
     versions: (function () {
         var u = navigator.userAgent;
         return {
-            mobile: !!u.match(/AppleWebKit.*Mobile.*/), // 移动终端
+            mobile: u.indexOf('Mobi') > -1 || u.indexOf('iPh') > -1 || u.indexOf('480') > -1, // 移动终端
             Tablet: u.indexOf('Tablet') > -1 || u.indexOf('Pad') > -1 || u.indexOf('Nexus 7') > -1, // 平板
             ios: u.indexOf('like Mac OS X') > -1, // ios终端
             android: u.indexOf('Android') > -1 || u.indexOf('Adr') > -1, // android终端
