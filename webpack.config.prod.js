@@ -2,7 +2,7 @@
  * @Author: z
  * @Date: 2017-06-05 11:29:16
  * @Last Modified by: xieshengyong
- * @Last Modified time: 2019-01-02 11:48:31
+ * @Last Modified time: 2019-07-29 15:21:57
  */
 const path = require('path');
 const webpack = require('webpack');
@@ -90,6 +90,7 @@ module.exports = function (env) {
                     ],
                     use: ExtractTextPlugin.extract({
                         fallback: 'style-loader',
+                        publicPath: isProduction() ? config.prod : '../',
                         use: [
                             {
                                 loader: 'css-loader',
