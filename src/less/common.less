@@ -65,3 +65,11 @@
     border: 1px solid #fff;
     box-sizing: border-box;
 }
+.setSize(@w, @h) when (default()) {
+    width: @w;
+    height: @h;
+}
+.setImg(@img) when (default()) {
+    .setSize(image-width(@img), image-height(@img));
+    background-image: url('@{img}');
+}
