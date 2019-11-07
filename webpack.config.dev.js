@@ -2,7 +2,7 @@
  * @Author: z
  * @Date: 2017-06-05 11:29:16
  * @Last Modified by: xieshengyong
- * @Last Modified time: 2019-01-02 11:34:27
+ * @Last Modified time: 2019-11-06 17:41:15
  */
 const path = require('path');
 const webpack = require('webpack');
@@ -59,12 +59,12 @@ module.exports = function (env) {
                         path.resolve(__dirname, 'src/js/util')
                     ],
                     use: [
-                        {
-                            loader: 'babel-loader',
-                            options: {
-                                cacheDirectory: true
-                            }
-                        },
+                        // {
+                        //     loader: 'babel-loader',
+                        //     options: {
+                        //         cacheDirectory: true
+                        //     }
+                        // },
                         {
                             loader: 'eslint-loader'
                         }

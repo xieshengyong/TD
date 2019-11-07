@@ -7,42 +7,22 @@
 * */
 import '../less/style.less';
 
-/** The animate() method */
-// import './util/fx';
-/** Animated show, hide, toggle, and fade*() methods. */
-// import './util/fx_methods';
-
 // 引入的包根据实际情况而定
-import LoadViewController from './app/LoadViewController';
-import IndexViewController from './app/IndexViewController';
+import {LoadViewController} from './app/LoadViewController';
+import {IndexViewController} from './app/IndexViewController';
 
-// 页面级对象池
-var pagePool = {
-    loadView: null,
-    indexView: null
-};
-
-var init = function () {
+var Router = {
     // load页面
-    var loadPageBack = function () {
-        pagePool.loadView = pagePool.loadView || new LoadViewController();
+    loadPageBack () {
+        LoadViewController.show();
 
-        var loadView = pagePool.loadView;
-        loadView.onhide = indexPageBack;
-
-        loadView.show();
-    };
+        LoadViewController.onHide = () => this.choosePageBack();
+    },
 
     // index页面
-    var indexPageBack = function () {
-        pagePool.indexView = pagePool.indexView || new IndexViewController();
-
-        var indexView = pagePool.indexView;
-        indexView.show();
-        // indexView.onhide = gamePageBack;
-    };
-
-    loadPageBack();
+    indexPageBack () {
+        IndexViewController.show();
+    }
 };
 
-init();
+Router.loadPageBack();

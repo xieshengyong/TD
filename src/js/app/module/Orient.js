@@ -5,7 +5,7 @@
         var sw = window.screen.width;
         var sh = window.screen.height;
 
-        [sw, sh] = sw < sh ? [sw, sh] : [sh, sw]; // Android下出现 srceen.width/height 值交换，所以进行大小值比较判断
+        [sw, sh] = sw < sh ? [sw, sh] : [sh, sw]; // Android下部分机型会出现 srceen.width/height 值交换，所以进行大小值比较判断
 
         document.querySelector('html').setAttribute('data-orient', cw !== sw ? 'landscape' : 'portrait');
     };

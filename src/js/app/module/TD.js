@@ -519,10 +519,7 @@ TD.loadingAni = function () {
 };
 
 TD.canvas2Img = function (param, width, height) {
-    let canvas = document.createElement('canvas');
-    canvas.width = width;
-    canvas.height = height;
-    let ctx = canvas.getContext('2d');
+    let {canvas, ctx} = TD.getCanvas(width, height); // eslint-disable-line
 
     const draw = () => {
         return new Promise((resolve, reject) => {
@@ -546,14 +543,45 @@ TD.canvas2Img = function (param, width, height) {
                 ctx.textAlign = para.textAlign || 'start';
                 ctx.fillText(para.string, para.x, para.y);
             } else if (para.type === 'imgArc') {
-
+                ctx.save();
+                ctx.arc(152, 492, 36, 0, Math.PI * 2);
+                ctx.clip();
+                ctx.drawImage(userImg, 112, 452, 72, 72);
+                ctx.restore();
             }
         });
     };
     draw();
 };
 
-TD.imgLoader = function (imgSrc, notAnonymous) {
+TD.canvas2Img.TYPE = {
+    /** ssssss */
+    IMG: 0,
+    IMGROUND: 1,
+    TEXT: 2
+};
+
+TD.canvas2Img.drawImg = async (ctx, imgsrc, x, y, w, h) => {
+    let img = await TD.singleImgLoader(imgsrc);
+    ctx.drawImage(img, x, y, w, h);
+};
+
+/**
+ * todo 圆角矩形、圆形，参考
+ * https://www.zhangxinxu.com/study/201406/image-border-radius-canvas.html
+ * https://www.jianshu.com/p/9a6ee2648d6f
+ */
+TD.canvas2Img.drawRoundImg = async (ctx, imgsrc, x, y, w, h) => {
+    let img = await TD.singleImgLoader(imgsrc);
+    ctx.drawImage(img, x, y, w, h);
+};
+
+TD.canvas2Img.fillText = async (ctx, string, x, y, w, h) => {
+    let img = await TD.singleImgLoader(imgsrc);
+    ctx.drawImage(img, x, y, w, h);
+};
+
+TD.singleImgLoader = function (imgSrc, notAnonymous) {
     return new Promise((resolve, reject) => {
         let img = document.createElement('img');
         img.onload = resolve.bind(this, img);
@@ -571,6 +599,16 @@ TD.getCanvas = function (w, h) {
         canvas: canvas,
         ctx: ctx
     };
+};
+
+/** 废弃 */
+TD.imgLoader = function (imgSrc, notAnonymous) {
+    return new Promise((resolve, reject) => {
+        let img = document.createElement('img');
+        img.onload = resolve.bind(this, img);
+        !notAnonymous && img.setAttribute('crossOrigin', 'Anonymous');
+        img.src = imgSrc;
+    });
 };
 
 // 事件统计

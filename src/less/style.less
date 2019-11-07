@@ -1,32 +1,6 @@
-/* rem，vw，vh使用注意 
-
-1、IE9及以上支持rem，但9-10伪类不支持rem
-2、iOS8及以上全线支持vw, vh, vmin, vmax
-3、IE9及以上支持vw，vh，不支持vmax，vmin
-4、Android4.4以上全线支持
-
-*/
+@import "common.less";
 @import "reset.less";
 @import "keyframe.less";
-@import "common.less";
-
-/* 兼容不支持vw的设备---start */
-html {
-    font-size: 50PX;
-}
-@media screen and (max-width: 768px) and (min-width: 414px) {
-    html {
-        font-size: 55.2PX;
-    };
-}
-/* 兼容不支持vmin的设备---end */
-
-/* 设计稿750px对应100vw 倍率100 */
-html {
-    font-size: 13.3333333333333vw;
-    -webkit-user-select: none;
-    user-select: none;
-}
 
 body {
     width: 100%;
@@ -36,58 +10,27 @@ body {
     font-size: 24px;
 }
 
-// 横竖屏布局相关，慎删；
 .m-vertical {
-    // display: none;
-    transform-origin: center center;
+    // .hide;
     .m-wrap {
-        width: 100vw;
-        height: 100vh;
         overflow: hidden;
         &:after{
-            .sizcont;
-            .abcter;
             content: '';
-            .setImg('../img/1.png');
+            .abcter;
+            .img('../img/1.png');
         }
         
     }
 }
 
-// 横竖屏布局相关，慎删；
 .m-horizontal {
     .hide;
-    transform-origin: center center;
-    transform: rotate(90deg);
     .m-wrap {
-        width: 100vh;
-        height: 100vw;
         overflow: hidden;
         &:after{
-            .setSize(1600px, 750px);
-            .sizcont;
-            .abcter;
             content: '';
-            background-image: url('../img/2.png');
-        }
-    }
-}
-
-// 横屏
-[data-orient="landscape"] {
-    font-size: 13.3333333333333vh;
-    .m-vertical {
-        transform: rotate(-90deg);
-        .m-wrap {
-            width: 100vh;
-            height: 100vw;
-        }
-    }
-    .m-horizontal {
-        transform: rotate(0deg);
-        .m-wrap {
-            width: 100vw;
-            height: 100vh;
+            .abcter;
+            .img('../img/2.png');
         }
     }
 }

@@ -62,14 +62,15 @@
     background-position: center;
 }
 .ol{
-    border: 1px solid #fff;
+    border: 1PX solid #ddd;
     box-sizing: border-box;
 }
-.setSize(@w, @h) when (default()) {
+.size(@w, @h) when (default()) {
     width: @w;
     height: @h;
 }
-.setImg(@img) when (default()) {
-    .setSize(image-width(@img), image-height(@img));
-    background-image: url('@{img}');
+.img(@img) when (default()) {
+    .size(image-width(@img), image-height(@img));
+    background: url('@{img}') center / image-width(@img) image-height(@img) no-repeat;
+
 }

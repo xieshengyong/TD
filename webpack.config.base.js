@@ -2,7 +2,7 @@
  * @Author: z
  * @Date: 2017-06-05 11:29:16
  * @Last Modified by: xieshengyong
- * @Last Modified time: 2019-07-11 23:31:29
+ * @Last Modified time: 2019-11-06 16:46:28
  */
 const path = require('path');
 // const webpack = require('webpack');
@@ -99,6 +99,8 @@ module.exports = function () {
                 template: 'index.ejs',
                 // template: 'ejs-render-loader!index.ejs',
                 inject: false,
+                chunks: ['vendor', 'index'],
+                chunksSortMode: 'manual',
                 hash: false,
                 minify: {
                     removeComments: true, // 移除HTML中的注释

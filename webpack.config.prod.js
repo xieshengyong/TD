@@ -2,7 +2,7 @@
  * @Author: z
  * @Date: 2017-06-05 11:29:16
  * @Last Modified by: xieshengyong
- * @Last Modified time: 2019-07-29 15:21:57
+ * @Last Modified time: 2019-11-07 16:24:55
  */
 const path = require('path');
 const webpack = require('webpack');
@@ -121,13 +121,13 @@ module.exports = function (env) {
                 }
             }),
             new ExtractTextPlugin('css/[name].[hash:8].css'),
-            new UglifyJSPlugin({
-                uglifyOptions: {
-                    compress: {
-                        drop_console: !!isProduction()
-                    }
-                }
-            })
+            // new UglifyJSPlugin({
+            //     uglifyOptions: {
+            //         compress: {
+            //             drop_console: !!isProduction()
+            //         }
+            //     }
+            // })
         ]
     });
 };
