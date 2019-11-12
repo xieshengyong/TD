@@ -31,6 +31,65 @@ export const LoadViewController = {
 
             this.onLoad && this.onLoad();
         });
+
+        this.init();
+    },
+
+    clip (data) {
+        let first = data[0]['shape'][0];
+        let second = data[0]['shape'][1];
+        let end = '';
+        data.forEach(ele1 => {
+            let arr = ele1.shape;
+            let st = '';
+
+            arr.push(arr[0]);
+            arr.push(arr[1]);
+
+            arr.unshift(second);
+            arr.unshift(first);
+
+            arr.forEach((ele2, idx) => {
+                let fix = (idx % 2) > 0 ? 'rem, ' : 'rem ';
+                st += ((ele2 / 100) + fix);
+            });
+
+            end += st;
+        });
+        let aaa = end.substr(0, end.length - 2);
+
+        return aaa;
+    },
+
+    hollow (data) {
+        let end = '0% 0%, 0% 100%, ';
+        data.forEach(ele1 => {
+            let arr = ele1.shape;
+            let st = arr[0] / 100 + 'rem 100%, ';
+
+            arr.push(arr[0]);
+            arr.push(arr[1]);
+
+            arr.forEach((ele2, idx) => {
+                let fix = (idx % 2) > 0 ? 'rem, ' : 'rem ';
+                st += ((ele2 / 100) + fix);
+            });
+
+            st += (arr[0] / 100) + 'rem 100%,';
+            end += st;
+        });
+        let aaa = end + '100% 100%, 100% 0%';
+
+        return aaa;
+    },
+
+    init () {
+        let a = require('./cs2.json');
+        // let aaa = this.clip(a['a']);
+        // let aaa = this.hollow(a['a']);
+        let aaa = this.hollow(a['t2']);
+        console.log('end :', aaa);
+        $('.m-loading').css('clip-path', 'polygon(' + aaa + ')');
     }
 };
 

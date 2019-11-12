@@ -23,24 +23,31 @@ import 'zepto/src/fx_methods';
 /**
  * PIXI
  */
-// import * as PIXI from 'pixi.js'; // eslint-disable-line
-/*
-    Parse or format dates
+// import * as PIXI from 'pixi.js';
 
-    fecha.format(<Date Object>, <String Format>);
+/**
+ * GSAP
+ */
+import 'gsap/src/uncompressed/TweenLite';
+import 'gsap/src/uncompressed/easing/EasePack';
 
-    // Custom formats
-    fecha.format(new Date(2015, 10, 20), 'dddd MMMM Do, YYYY'); // 'Friday November 20th, 2015'
-    fecha.format(new Date(1998, 5, 3, 15, 23, 10, 350), 'YYYY-MM-DD hh:mm:ss.SSS A'); // '1998-06-03 03:23:10.350 PM'
-
-    // Named masks
-    fecha.format(new Date(2015, 10, 20), 'mediumDate'); // 'Nov 20, 2015'
-    fecha.format(new Date(2015, 2, 10, 5, 30, 20), 'shortTime'); // '05:30'
-
-    // Literals
-    fecha.format(new Date(2001, 2, 5, 6, 7, 2, 5), '[on] MM-DD-YYYY [at] HH:mm'); // 'on 03-05-2001 at 06:07'
+/**
+ *    Parse or format dates
+ *
+ *    fecha.format(<Date Object>, <String Format>);
+ *
+ *    // Custom formats
+ *    fecha.format(new Date(2015, 10, 20), 'dddd MMMM Do, YYYY'); // 'Friday November 20th, 2015'
+ *    fecha.format(new Date(1998, 5, 3, 15, 23, 10, 350), 'YYYY-MM-DD hh:mm:ss.SSS A'); // '1998-06-03 03:23:10.350 PM'
+ *
+ *    // Named masks
+ *    fecha.format(new Date(2015, 10, 20), 'mediumDate'); // 'Nov 20, 2015'
+ *    fecha.format(new Date(2015, 2, 10, 5, 30, 20), 'shortTime'); // '05:30'
+ *
+ *    // Literals
+ *    fecha.format(new Date(2001, 2, 5, 6, 7, 2, 5), '[on] MM-DD-YYYY [at] HH:mm'); // 'on 03-05-2001 at 06:07'
 */
 // import fecha from 'fecha';
 
-// window.PIXI = PIXI;
-// window.fecha = fecha;
+typeof PIXI !== 'undefined' && (window.PIXI = PIXI);
+typeof fecha !== 'undefined' && (window.fecha = fecha);
