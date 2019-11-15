@@ -35,34 +35,32 @@ export const LoadViewController = {
         this.init();
     },
 
-    clip2Signle (data) {
-        let first = data[0]['shape'][0];
-        let second = data[0]['shape'][1];
-        let end = '';
-        data.forEach(ele1 => {
-            let arr = ele1.shape;
-            let st = '';
+    // 图形剪切
+    clipSignleGraphics (data) {
+        let end = [];
+        let bodySize = data.body.size;
+        let shapes = data.shapes;
 
-            // arr.push(arr[0]);
-            // arr.push(arr[1]);
+        let clacPos = (x, y) => {
+            return [(x / bodySize[0] * 100).toFixed(2) + '%', ' ', (y / bodySize[1] * 100).toFixed(2) + '%'];
+        };
 
-            // arr.unshift(second);
-            // arr.unshift(first);
+        shapes.forEach(ele1 => {
+            let polys = ele1.polys;
 
-            arr.forEach((ele2, idx) => {
-                let fix = (idx % 2) > 0 ? 'rem, ' : 'rem ';
-                st += ((ele2 / 100) + fix);
+            polys.forEach(ele2 => {
+                (polys.length > 1 || shapes.length > 1) && (ele2 = ele2.concat(ele2[0], ele2[1]));
+
+                shapes.length > 1 && (ele2 = ele2.concat(shapes[0]['polys'][0][0], shapes[0]['polys'][0][1]));
+
+                for (let index = 0; index < ele2.length; index += 2) {
+                    end = end.concat(clacPos(ele2[index], ele2[index + 1]), ', ');
+                }
             });
-
-            end += st;
         });
-        let aaa = end.substr(0, end.length - 2);
 
-        return aaa;
-    },
-
-    clipSignleGraphics () {
-
+        end.pop();
+        return end.join('');
     },
 
     clip2Mulit (data, wrap) {
@@ -119,6 +117,9 @@ export const LoadViewController = {
         // this.clip2Mulit(require('./c.json')['c'], $('.m-loading')[0]);
         // this.clip2Mulit(require('./c.json')['b'], $('.m-loading')[0]);
 
+        console.log(this.clipSignleGraphics(require('./cs2.json')['a']));
+        $('.m-end').css('clip-path', 'polygon(' + this.clipSignleGraphics(require('./cs2.json')['a']) + ')');
+
         for (let index = 0; index < 33; index++) {
             let div = $('<div class="idx-' + index + '"></div>');
             div.css('background-color', getRandomColor());
@@ -127,14 +128,11 @@ export const LoadViewController = {
 
         const showAnimal = (data, name) => {
             let divall = $('.m-loading div');
-            let i = 32;
-            while (i > -1) {
-                let ii = i;
+            for (let index = 32; index >= 0; index--) {
                 setTimeout(() => {
-                    let div = divall.eq(ii);
-                    div.css('clip-path', 'polygon(' + this.clip2Signle(data[name + pad(ii, 5)]) + ')');
-                }, i * 30);
-                i--;
+                    let div = divall.eq(index);
+                    div.css('clip-path', 'polygon(' + this.clipSignleGraphics(data[name + pad(index, 5)]) + ')');
+                }, index * 20);
             }
         };
 

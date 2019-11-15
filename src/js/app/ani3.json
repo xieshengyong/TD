@@ -1,200 +1,663 @@
 { 
-    
-    "ani3_00000": [
-        {
-            "shape": [ 521,134, 511,137, 517,127 ]
-        }
-    ]
-    , 
-    "ani3_00001": [
-        {
-            "shape": [ 481,183, 516,129, 530,146 ]
-        }
-    ]
-    , 
-    "ani3_00002": [
-        {
-            "shape": [ 539,158, 528,144, 601,148 ]
-        }
-    ]
-    , 
-    "ani3_00003": [
-        {
-            "shape": [ 527,145, 583,133, 600,151 ]
-        }
-    ]
-    , 
-    "ani3_00004": [
-        {
-            "shape": [ 530,147, 542,122.5, 585,136 ]
-        }
-    ]
-    , 
-    "ani3_00005": [
-        {
-            "shape": [ 530,147, 503,111, 542.5,126 ]
-        }
-    ]
-    , 
-    "ani3_00006": [
-        {
-            "shape": [ 448,210, 499,110, 535,148 ]
-        }
-    ]
-    , 
-    "ani3_00007": [
-        {
-            "shape": [ 422.5,155, 502.5,111, 448,210.5 ]
-        }
-    ]
-    , 
-    "ani3_00008": [
-        {
-            "shape": [ 445,209, 530,147, 437,301 ]
-        }
-    ]
-    , 
-    "ani3_00009": [
-        {
-            "shape": [ 435,300, 529,144, 542,154 ]
-        }
-    ]
-    , 
-    "ani3_00010": [
-        {
-            "shape": [ 319,201.5, 424,158, 450,211 ]
-        }
-    ]
-    , 
-    "ani3_00011": [
-        {
-            "shape": [ 434,239, 340,200.5, 448,212 ]
-        }
-    ]
-    , 
-    "ani3_00012": [
-        {
-            "shape": [ 350,259.5, 338,200.5, 432,238 ]
-        }
-    ]
-    , 
-    "ani3_00013": [
-        {
-            "shape": [ 446,212, 436,301, 379,342 ]
-        }
-    ]
-    , 
-    "ani3_00014": [
-        {
-            "shape": [ 363,258, 448,213, 444,248 ]
-        }
-    ]
-    , 
-    "ani3_00015": [
-        {
-            "shape": [ 318,325, 432,243, 378,345 ]
-        }
-    ]
-    , 
-    "ani3_00016": [
-        {
-            "shape": [ 215,292, 441,240, 321,327 ]
-        }
-    ]
-    , 
-    "ani3_00017": [
-        {
-            "shape": [ 218,247, 339,201, 342.5,229 ]
-        }
-    ]
-    , 
-    "ani3_00018": [
-        {
-            "shape": [ 337,197, 355,261, 148,291 ]
-        }
-    ]
-    , 
-    "ani3_00019": [
-        {
-            "shape": [ 190,269, 178,248, 257,275 ]
-        }
-    ]
-    , 
-    "ani3_00020": [
-        {
-            "shape": [ 191,287, 128,261.5, 258,275 ]
-        }
-    ]
-    , 
-    "ani3_00021": [
-        {
-            "shape": [ 105,297, 162,273.5, 192,284 ]
-        }
-    ]
-    , 
-    "ani3_00022": [
-        {
-            "shape": [ 375.5,342, 400,324.5, 373,400 ]
-        }
-    ]
-    , 
-    "ani3_00023": [
-        {
-            "shape": [ 375,398, 362,337.5, 378,344 ]
-        }
-    ]
-    , 
-    "ani3_00024": [
-        {
-            "shape": [ 372,397, 379,382, 404,436 ]
-        }
-    ]
-    , 
-    "ani3_00025": [
-        {
-            "shape": [ 379,403, 386,410, 388,432 ]
-        }
-    ]
-    , 
-    "ani3_00026": [
-        {
-            "shape": [ 192,285.5, 341.5,262, 222,293.5 ]
-        }
-    ]
-    , 
-    "ani3_00027": [
-        {
-            "shape": [ 637,442, 620,438, 650,328 ]
-        }
-    ]
-    , 
-    "ani3_00028": [
-        {
-            "shape": [ 615,462, 597,340, 634,463 ]
-        }
-    ]
-    , 
-    "ani3_00029": [
-        {
-            "shape": [ 615,462, 597,340, 634,463 ]
-        }
-    ]
-    , 
-    "ani3_00030": [
-        {
-            "shape": [ 615,462, 597,340, 634,463 ]
-        }
-    ]
-    , 
-    "ani3_00031": [
-        {
-            "shape": [ 615,462, 597,340, 634,463 ]
-        }
-    ]
-    , 
-    "ani3_00032": [
-        {
-            "shape": [ 615,462, 597,340, 634,463 ]
-        }
-    ]
-}
+    "ani3_00000": {
+        "body": {
+            "damping": 0.1,
+            "gravityScale": 1,
+            "mass": 1,
+            "size": [750, 525]
+        },
+        "shapes": [
+            {
+                "name": "",
+                "sensor": false,
+                "collisionGroup": 1,
+                "collisionMask": 1,
+                "type": "poly",
+                "polys": [
+                    [521.000,134.000 , 511.000,137.000 , 517.000,127.000 ]
+                ]
+            }
+        ]
+    }, 
+    "ani3_00001": {
+        "body": {
+            "damping": 0.10000000149011612,
+            "gravityScale": 1,
+            "mass": 1,
+            "size": [750, 525]
+        },
+        "shapes": [
+            {
+                "name": "",
+                "sensor": false,
+                "collisionGroup": 1,
+                "collisionMask": 1,
+                "type": "poly",
+                "polys": [
+                    [481.000,183.000 , 516.000,129.000 , 530.000,146.000 ]
+                ]
+            }
+        ]
+    }, 
+    "ani3_00002": {
+        "body": {
+            "damping": 0.10000000149011612,
+            "gravityScale": 1,
+            "mass": 1,
+            "size": [750, 525]
+        },
+        "shapes": [
+            {
+                "name": "",
+                "sensor": false,
+                "collisionGroup": 1,
+                "collisionMask": 1,
+                "type": "poly",
+                "polys": [
+                    [539.000,158.000 , 528.000,144.000 , 601.000,148.000 ]
+                ]
+            }
+        ]
+    }, 
+    "ani3_00003": {
+        "body": {
+            "damping": 0.10000000149011612,
+            "gravityScale": 1,
+            "mass": 1,
+            "size": [750, 525]
+        },
+        "shapes": [
+            {
+                "name": "",
+                "sensor": false,
+                "collisionGroup": 1,
+                "collisionMask": 1,
+                "type": "poly",
+                "polys": [
+                    [527.000,145.000 , 583.000,133.000 , 600.000,151.000 ]
+                ]
+            }
+        ]
+    }, 
+    "ani3_00004": {
+        "body": {
+            "damping": 0.10000000149011612,
+            "gravityScale": 1,
+            "mass": 1,
+            "size": [750, 525]
+        },
+        "shapes": [
+            {
+                "name": "",
+                "sensor": false,
+                "collisionGroup": 1,
+                "collisionMask": 1,
+                "type": "poly",
+                "polys": [
+                    [530.000,147.000 , 542.000,122.500 , 585.000,136.000 ]
+                ]
+            }
+        ]
+    }, 
+    "ani3_00005": {
+        "body": {
+            "damping": 0.10000000149011612,
+            "gravityScale": 1,
+            "mass": 1,
+            "size": [750, 525]
+        },
+        "shapes": [
+            {
+                "name": "",
+                "sensor": false,
+                "collisionGroup": 1,
+                "collisionMask": 1,
+                "type": "poly",
+                "polys": [
+                    [530.000,147.000 , 503.000,111.000 , 542.500,126.000 ]
+                ]
+            }
+        ]
+    }, 
+    "ani3_00006": {
+        "body": {
+            "damping": 0.10000000149011612,
+            "gravityScale": 1,
+            "mass": 1,
+            "size": [750, 525]
+        },
+        "shapes": [
+            {
+                "name": "",
+                "sensor": false,
+                "collisionGroup": 1,
+                "collisionMask": 1,
+                "type": "poly",
+                "polys": [
+                    [448.000,210.000 , 499.000,110.000 , 535.000,148.000 ]
+                ]
+            }
+        ]
+    }, 
+    "ani3_00007": {
+        "body": {
+            "damping": 0.10000000149011612,
+            "gravityScale": 1,
+            "mass": 1,
+            "size": [750, 525]
+        },
+        "shapes": [
+            {
+                "name": "",
+                "sensor": false,
+                "collisionGroup": 1,
+                "collisionMask": 1,
+                "type": "poly",
+                "polys": [
+                    [422.500,155.000 , 502.500,111.000 , 448.000,210.500 ]
+                ]
+            }
+        ]
+    }, 
+    "ani3_00008": {
+        "body": {
+            "damping": 0.10000000149011612,
+            "gravityScale": 1,
+            "mass": 1,
+            "size": [750, 525]
+        },
+        "shapes": [
+            {
+                "name": "",
+                "sensor": false,
+                "collisionGroup": 1,
+                "collisionMask": 1,
+                "type": "poly",
+                "polys": [
+                    [445.000,209.000 , 530.000,147.000 , 437.000,301.000 ]
+                ]
+            }
+        ]
+    }, 
+    "ani3_00009": {
+        "body": {
+            "damping": 0.10000000149011612,
+            "gravityScale": 1,
+            "mass": 1,
+            "size": [750, 525]
+        },
+        "shapes": [
+            {
+                "name": "",
+                "sensor": false,
+                "collisionGroup": 1,
+                "collisionMask": 1,
+                "type": "poly",
+                "polys": [
+                    [435.000,300.000 , 529.000,144.000 , 542.000,154.000 ]
+                ]
+            }
+        ]
+    }, 
+    "ani3_00010": {
+        "body": {
+            "damping": 0.10000000149011612,
+            "gravityScale": 1,
+            "mass": 1,
+            "size": [750, 525]
+        },
+        "shapes": [
+            {
+                "name": "",
+                "sensor": false,
+                "collisionGroup": 1,
+                "collisionMask": 1,
+                "type": "poly",
+                "polys": [
+                    [319.000,201.500 , 424.000,158.000 , 450.000,211.000 ]
+                ]
+            }
+        ]
+    }, 
+    "ani3_00011": {
+        "body": {
+            "damping": 0.10000000149011612,
+            "gravityScale": 1,
+            "mass": 1,
+            "size": [750, 525]
+        },
+        "shapes": [
+            {
+                "name": "",
+                "sensor": false,
+                "collisionGroup": 1,
+                "collisionMask": 1,
+                "type": "poly",
+                "polys": [
+                    [434.000,239.000 , 340.000,200.500 , 448.000,212.000 ]
+                ]
+            }
+        ]
+    }, 
+    "ani3_00012": {
+        "body": {
+            "damping": 0.10000000149011612,
+            "gravityScale": 1,
+            "mass": 1,
+            "size": [750, 525]
+        },
+        "shapes": [
+            {
+                "name": "",
+                "sensor": false,
+                "collisionGroup": 1,
+                "collisionMask": 1,
+                "type": "poly",
+                "polys": [
+                    [350.000,259.500 , 338.000,200.500 , 432.000,238.000 ]
+                ]
+            }
+        ]
+    }, 
+    "ani3_00013": {
+        "body": {
+            "damping": 0.10000000149011612,
+            "gravityScale": 1,
+            "mass": 1,
+            "size": [750, 525]
+        },
+        "shapes": [
+            {
+                "name": "",
+                "sensor": false,
+                "collisionGroup": 1,
+                "collisionMask": 1,
+                "type": "poly",
+                "polys": [
+                    [446.000,212.000 , 436.000,301.000 , 379.000,342.000 ]
+                ]
+            }
+        ]
+    }, 
+    "ani3_00014": {
+        "body": {
+            "damping": 0.10000000149011612,
+            "gravityScale": 1,
+            "mass": 1,
+            "size": [750, 525]
+        },
+        "shapes": [
+            {
+                "name": "",
+                "sensor": false,
+                "collisionGroup": 1,
+                "collisionMask": 1,
+                "type": "poly",
+                "polys": [
+                    [363.000,258.000 , 448.000,213.000 , 444.000,248.000 ]
+                ]
+            }
+        ]
+    }, 
+    "ani3_00015": {
+        "body": {
+            "damping": 0.10000000149011612,
+            "gravityScale": 1,
+            "mass": 1,
+            "size": [750, 525]
+        },
+        "shapes": [
+            {
+                "name": "",
+                "sensor": false,
+                "collisionGroup": 1,
+                "collisionMask": 1,
+                "type": "poly",
+                "polys": [
+                    [318.000,325.000 , 432.000,243.000 , 378.000,345.000 ]
+                ]
+            }
+        ]
+    }, 
+    "ani3_00016": {
+        "body": {
+            "damping": 0.10000000149011612,
+            "gravityScale": 1,
+            "mass": 1,
+            "size": [750, 525]
+        },
+        "shapes": [
+            {
+                "name": "",
+                "sensor": false,
+                "collisionGroup": 1,
+                "collisionMask": 1,
+                "type": "poly",
+                "polys": [
+                    [215.000,292.000 , 441.000,240.000 , 321.000,327.000 ]
+                ]
+            }
+        ]
+    }, 
+    "ani3_00017": {
+        "body": {
+            "damping": 0.10000000149011612,
+            "gravityScale": 1,
+            "mass": 1,
+            "size": [750, 525]
+        },
+        "shapes": [
+            {
+                "name": "",
+                "sensor": false,
+                "collisionGroup": 1,
+                "collisionMask": 1,
+                "type": "poly",
+                "polys": [
+                    [218.000,247.000 , 339.000,201.000 , 342.500,229.000 ]
+                ]
+            }
+        ]
+    }, 
+    "ani3_00018": {
+        "body": {
+            "damping": 0.10000000149011612,
+            "gravityScale": 1,
+            "mass": 1,
+            "size": [750, 525]
+        },
+        "shapes": [
+            {
+                "name": "",
+                "sensor": false,
+                "collisionGroup": 1,
+                "collisionMask": 1,
+                "type": "poly",
+                "polys": [
+                    [337.000,197.000 , 355.000,261.000 , 148.000,291.000 ]
+                ]
+            }
+        ]
+    }, 
+    "ani3_00019": {
+        "body": {
+            "damping": 0.10000000149011612,
+            "gravityScale": 1,
+            "mass": 1,
+            "size": [750, 525]
+        },
+        "shapes": [
+            {
+                "name": "",
+                "sensor": false,
+                "collisionGroup": 1,
+                "collisionMask": 1,
+                "type": "poly",
+                "polys": [
+                    [190.000,269.000 , 178.000,248.000 , 257.000,275.000 ]
+                ]
+            }
+        ]
+    }, 
+    "ani3_00020": {
+        "body": {
+            "damping": 0.10000000149011612,
+            "gravityScale": 1,
+            "mass": 1,
+            "size": [750, 525]
+        },
+        "shapes": [
+            {
+                "name": "",
+                "sensor": false,
+                "collisionGroup": 1,
+                "collisionMask": 1,
+                "type": "poly",
+                "polys": [
+                    [191.000,287.000 , 128.000,261.500 , 258.000,275.000 ]
+                ]
+            }
+        ]
+    }, 
+    "ani3_00021": {
+        "body": {
+            "damping": 0.10000000149011612,
+            "gravityScale": 1,
+            "mass": 1,
+            "size": [750, 525]
+        },
+        "shapes": [
+            {
+                "name": "",
+                "sensor": false,
+                "collisionGroup": 1,
+                "collisionMask": 1,
+                "type": "poly",
+                "polys": [
+                    [105.000,297.000 , 162.000,273.500 , 192.000,284.000 ]
+                ]
+            }
+        ]
+    }, 
+    "ani3_00022": {
+        "body": {
+            "damping": 0.10000000149011612,
+            "gravityScale": 1,
+            "mass": 1,
+            "size": [750, 525]
+        },
+        "shapes": [
+            {
+                "name": "",
+                "sensor": false,
+                "collisionGroup": 1,
+                "collisionMask": 1,
+                "type": "poly",
+                "polys": [
+                    [375.500,342.000 , 400.000,324.500 , 373.000,400.000 ]
+                ]
+            }
+        ]
+    }, 
+    "ani3_00023": {
+        "body": {
+            "damping": 0.10000000149011612,
+            "gravityScale": 1,
+            "mass": 1,
+            "size": [750, 525]
+        },
+        "shapes": [
+            {
+                "name": "",
+                "sensor": false,
+                "collisionGroup": 1,
+                "collisionMask": 1,
+                "type": "poly",
+                "polys": [
+                    [375.000,398.000 , 362.000,337.500 , 378.000,344.000 ]
+                ]
+            }
+        ]
+    }, 
+    "ani3_00024": {
+        "body": {
+            "damping": 0.10000000149011612,
+            "gravityScale": 1,
+            "mass": 1,
+            "size": [750, 525]
+        },
+        "shapes": [
+            {
+                "name": "",
+                "sensor": false,
+                "collisionGroup": 1,
+                "collisionMask": 1,
+                "type": "poly",
+                "polys": [
+                    [372.000,397.000 , 379.000,382.000 , 404.000,436.000 ]
+                ]
+            }
+        ]
+    }, 
+    "ani3_00025": {
+        "body": {
+            "damping": 0.10000000149011612,
+            "gravityScale": 1,
+            "mass": 1,
+            "size": [750, 525]
+        },
+        "shapes": [
+            {
+                "name": "",
+                "sensor": false,
+                "collisionGroup": 1,
+                "collisionMask": 1,
+                "type": "poly",
+                "polys": [
+                    [379.000,403.000 , 386.000,410.000 , 388.000,432.000 ]
+                ]
+            }
+        ]
+    }, 
+    "ani3_00026": {
+        "body": {
+            "damping": 0.10000000149011612,
+            "gravityScale": 1,
+            "mass": 1,
+            "size": [750, 525]
+        },
+        "shapes": [
+            {
+                "name": "",
+                "sensor": false,
+                "collisionGroup": 1,
+                "collisionMask": 1,
+                "type": "poly",
+                "polys": [
+                    [192.000,285.500 , 341.500,262.000 , 222.000,293.500 ]
+                ]
+            }
+        ]
+    }, 
+    "ani3_00027": {
+        "body": {
+            "damping": 0.10000000149011612,
+            "gravityScale": 1,
+            "mass": 1,
+            "size": [750, 525]
+        },
+        "shapes": [
+            {
+                "name": "",
+                "sensor": false,
+                "collisionGroup": 1,
+                "collisionMask": 1,
+                "type": "poly",
+                "polys": [
+                    [637.000,442.000 , 620.000,438.000 , 650.000,328.000 ]
+                ]
+            }
+        ]
+    }, 
+    "ani3_00028": {
+        "body": {
+            "damping": 0.10000000149011612,
+            "gravityScale": 1,
+            "mass": 1,
+            "size": [750, 525]
+        },
+        "shapes": [
+            {
+                "name": "",
+                "sensor": false,
+                "collisionGroup": 1,
+                "collisionMask": 1,
+                "type": "poly",
+                "polys": [
+                    [615.000,462.000 , 597.000,340.000 , 634.000,463.000 ]
+                ]
+            }
+        ]
+    }, 
+    "ani3_00029": {
+        "body": {
+            "damping": 0.10000000149011612,
+            "gravityScale": 1,
+            "mass": 1,
+            "size": [750, 525]
+        },
+        "shapes": [
+            {
+                "name": "",
+                "sensor": false,
+                "collisionGroup": 1,
+                "collisionMask": 1,
+                "type": "poly",
+                "polys": [
+                    [615.000,462.000 , 597.000,340.000 , 634.000,463.000 ]
+                ]
+            }
+        ]
+    }, 
+    "ani3_00030": {
+        "body": {
+            "damping": 0.10000000149011612,
+            "gravityScale": 1,
+            "mass": 1,
+            "size": [750, 525]
+        },
+        "shapes": [
+            {
+                "name": "",
+                "sensor": false,
+                "collisionGroup": 1,
+                "collisionMask": 1,
+                "type": "poly",
+                "polys": [
+                    [615.000,462.000 , 597.000,340.000 , 634.000,463.000 ]
+                ]
+            }
+        ]
+    }, 
+    "ani3_00031": {
+        "body": {
+            "damping": 0.10000000149011612,
+            "gravityScale": 1,
+            "mass": 1,
+            "size": [750, 525]
+        },
+        "shapes": [
+            {
+                "name": "",
+                "sensor": false,
+                "collisionGroup": 1,
+                "collisionMask": 1,
+                "type": "poly",
+                "polys": [
+                    [615.000,462.000 , 597.000,340.000 , 634.000,463.000 ]
+                ]
+            }
+        ]
+    }, 
+    "ani3_00032": {
+        "body": {
+            "damping": 0.10000000149011612,
+            "gravityScale": 1,
+            "mass": 1,
+            "size": [750, 525]
+        },
+        "shapes": [
+            {
+                "name": "",
+                "sensor": false,
+                "collisionGroup": 1,
+                "collisionMask": 1,
+                "type": "poly",
+                "polys": [
+                    [615.000,462.000 , 597.000,340.000 , 634.000,463.000 ]
+                ]
+            }
+        ]
+    }
+} 
+
