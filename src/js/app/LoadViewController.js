@@ -36,8 +36,8 @@ export const LoadViewController = {
     },
 
     // 图形剪切
-    clipSignleGraphics (data) {
-        let end = [];
+    clipSignleGraphics (data, percent, reverse) {
+        let end = !reverse ? [] : ['0% ', '0%', ', ', '0% ', '100%', ', '];
         let bodySize = data.body.size;
         let shapes = data.shapes;
 
@@ -46,18 +46,27 @@ export const LoadViewController = {
         };
 
         shapes.forEach(ele1 => {
+            if (ele1.type !== 'poly') return;
             let polys = ele1.polys;
 
-            polys.forEach(ele2 => {
-                (polys.length > 1 || shapes.length > 1) && (ele2 = ele2.concat(ele2[0], ele2[1]));
+            reverse && (end = end.concat(clacPos(polys[0][0], 0)[0], ' 100%', ', '));
 
+            polys.forEach(ele2 => {
+                // 多个被剖分的三角形时，闭合各自三角的起点
+                (polys.length > 1 || shapes.length > 1 || reverse) && (ele2 = ele2.concat(ele2[0], ele2[1]));
+
+                // 多个独立形状时，每个形状结束时回到第一个形状起点
                 shapes.length > 1 && (ele2 = ele2.concat(shapes[0]['polys'][0][0], shapes[0]['polys'][0][1]));
 
                 for (let index = 0; index < ele2.length; index += 2) {
                     end = end.concat(clacPos(ele2[index], ele2[index + 1]), ', ');
                 }
             });
+
+            reverse && (end = end.concat(clacPos(polys[0][0], 0)[0], ' 100%', ', '));
         });
+
+        reverse && (end = end.concat(['100% ', '100%', ', ', '100% ', '0%', ', ']));
 
         end.pop();
         return end.join('');
@@ -117,34 +126,35 @@ export const LoadViewController = {
         // this.clip2Mulit(require('./c.json')['c'], $('.m-loading')[0]);
         // this.clip2Mulit(require('./c.json')['b'], $('.m-loading')[0]);
 
-        console.log(this.clipSignleGraphics(require('./cs2.json')['a']));
-        $('.m-end').css('clip-path', 'polygon(' + this.clipSignleGraphics(require('./cs2.json')['a']) + ')');
+        // console.log(this.clipSignleGraphics(require('./cs2.json')['a'], true));
+        // $('.m-end').css('clip-path', 'polygon(' + this.clipSignleGraphics(require('./cs2.json')['t2'], true) + ')');
+        $('.m-end').css('clip-path', 'polygon(' + this.clipSignleGraphics(require('./cs2.json')['t2'], true, true) + ')');
 
-        for (let index = 0; index < 33; index++) {
-            let div = $('<div class="idx-' + index + '"></div>');
-            div.css('background-color', getRandomColor());
-            $('.m-loading').append(div);
-        }
+        // for (let index = 0; index < 33; index++) {
+        //     let div = $('<div class="idx-' + index + '"></div>');
+        //     div.css('background-color', getRandomColor());
+        //     $('.m-loading').append(div);
+        // }
 
-        const showAnimal = (data, name) => {
-            let divall = $('.m-loading div');
-            for (let index = 32; index >= 0; index--) {
-                setTimeout(() => {
-                    let div = divall.eq(index);
-                    div.css('clip-path', 'polygon(' + this.clipSignleGraphics(data[name + pad(index, 5)]) + ')');
-                }, index * 20);
-            }
-        };
+        // const showAnimal = (data, name) => {
+        //     let divall = $('.m-loading div');
+        //     for (let index = 32; index >= 0; index--) {
+        //         setTimeout(() => {
+        //             let div = divall.eq(index);
+        //             div.css('clip-path', 'polygon(' + this.clipSignleGraphics(data[name + pad(index, 5)]) + ')');
+        //         }, index * 20);
+        //     }
+        // };
 
-        let ani2 = require('./ani2.json');
-        let ani3 = require('./ani3.json');
-        showAnimal(ani3, 'ani3_');
+        // let ani2 = require('./ani2.json');
+        // let ani3 = require('./ani3.json');
+        // showAnimal(ani3, 'ani3_');
 
-        let isNext = !false;
-        $('body').click(() => {
-            isNext ? showAnimal(ani2, 'ani2_') : showAnimal(ani3, 'ani3_');
-            isNext = !isNext;
-        });
+        // let isNext = !false;
+        // $('body').click(() => {
+        //     isNext ? showAnimal(ani2, 'ani2_') : showAnimal(ani3, 'ani3_');
+        //     isNext = !isNext;
+        // });
     }
 };
 
