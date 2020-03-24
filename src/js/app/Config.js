@@ -1,5 +1,3 @@
-import Preload from './module/Preload.js';
-
 var Config = {};
 
 // ajax请求链接
@@ -15,7 +13,7 @@ Config.defShare = {
     desc: '分享描述',
     link: location.href,
     // 分享配图
-    img: require('../../img/share.jpg'),
+    img: require('../../img/kf/share.jpg'),
     // 项目名，数据查询时候用
     proj: 'streetgame',
     // 填写公众号绑定的appid
@@ -23,38 +21,21 @@ Config.defShare = {
     cnzz: '' // 例如: 1259179479
 };
 
-Config.Preload = Preload;
+Config.bgm = new Howl({
+    src: require('../../media/test_audio.mp3'),
+    loop: true,
+    html5: false,
+    autoplay: !localStorage.debug
+});
 
-// 预加载的图片
-Config.pageImgs = {
-    imgs: [
-        {
-            name: 'test',
-            url: require('../../media/test_audio.mp3')
-        },
-        {
-            name: 'test2',
-            url: require('../../img/2.png')
-        }
-    ],
-    sprites: [
-        /*
-        {
-            el: $('.m-game .kf-game-video'),
-            pathPrefix: Config.imgPath,
-            postfix: 'jpg'
-        }
-        */
-    ],
-    keyimgs: [
-        /*
-        {
-            el: $('.m-game .kf-game-video'),
-            pathPrefix: Config.imgPath,
-            postfix: 'jpg'
-        }
-        */
-    ]
-};
+document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') {
+        // 打开媒体
+        Howler && Howler.mute(false);
+    } else {
+        // 关闭媒体
+        Howler && Howler.mute(true);
+    }
+});
 
 module.exports = Config;

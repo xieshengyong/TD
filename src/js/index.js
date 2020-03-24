@@ -12,38 +12,30 @@ import './util/fx';
 /** Animated show, hide, toggle, and fade*() methods. */
 import './util/fx_methods';
 
+import 'howler/src/howler.core';
+
 // 引入的包根据实际情况而定
 import LoadViewController from './app/LoadViewController';
 import IndexViewController from './app/IndexViewController';
 
-// 页面级对象池
-var pagePool = {
-    loadView: null,
-    indexView: null
-};
-
 var init = function () {
     // load页面
-    var loadPageBack = function () {
-        pagePool.loadView = pagePool.loadView || new LoadViewController();
+    const loadPageBack = () => {
+        let loadView = new LoadViewController();
 
-        var loadView = pagePool.loadView;
-        loadView.show();
-        loadView.onhide = indexPageBack;
+        loadView.onHide = indexPageBack;
 
         loadView.load();
     };
 
-    // index页面
-    var indexPageBack = function () {
-        pagePool.indexView = pagePool.indexView || new IndexViewController();
+    const indexPageBack = () => {
+        let indexView = new IndexViewController();
 
-        var indexView = pagePool.indexView;
         indexView.show();
-        // indexView.onhide = gamePageBack;
+        indexView.onHide = indexPageBack;
     };
 
     loadPageBack();
 };
 
-init();
+new init(); // eslint-disable-line

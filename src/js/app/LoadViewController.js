@@ -1,5 +1,7 @@
 import TD from './module/TD.js';
 import Config from './Config.js';
+import PX from './module/PX';
+import * as PIXI from 'pixi.js';
 
 // 项目初始化的一些函数
 var initProject = function () {
@@ -51,76 +53,85 @@ var initProject = function () {
 };
 
 // 加载页对象
-var LoadViewController = function () {
-    // 公共变量
-    var _that = this;
-
-    // 私有变量
-    var _private = {};
-
-    _private.pageEl = $('.m-loading');
-
-    _private.isInit = false;
-
-    // 初始化，包括整体页面
-    _private.init = function () {
-        if (_private.isInit === true) {
-            return;
-        }
+export default class LoadViewController {
+    constructor () {
         initProject();
 
-        // 加载体现在页面上
-        _private.processLineEl = _private.pageEl.find('.loadProcess .inner');
-
-        _private.gload = new Config.Preload(Config.pageImgs);
-
-        _private.gload.onloading = function (p) {
-            console.log(p);
-            _private.processLineEl.css('height', p + '%');
-        };
-
-        _private.gload.onload = function () {
-            _that.hide();
-        };
-
-        _private.gload.onfail = function (msg) {
-            console.log(msg);
-        };
-
-        _private.isInit = true;
-    };
-
-    // 显示
-    _that.show = function () {
-        _private.pageEl.show();
-    };
-
-    // 隐藏
-    _that.hide = function () {
-        _that.onhide && _that.onhide();
-        _private.pageEl.hide();
-    };
-
-    // 执行加载
-    _that.load = function () {
-        _private.gload.load();
-    };
-
-/* 此代码解决横竖屏切换时iso上触发多次的bug
-    var rotateELSize = function (e) {
-        var winWidth = document.documentElement.clientWidth;
-        var winHeight = document.documentElement.clientHeight;
-
-        if (e && winWidth / winHeight < 1.2 && winWidth / winHeight > 0.8) {
-            return false;
+        // 防止IOS序列帧动画抖动
+        if (TD.browser.versions.ios) {
+            PIXI.settings.PRECISION_FRAGMENT = PIXI.PRECISION.HIGH;
         }
 
-        // do something
+        PX.init();
+    }
 
-        window.addEventListener('resize', rotateELSize);
+    load () {
+        let progressWrapEl = $('.m-loading .procress-wrap'); // eslint-disable-line
+        let progressEl = $('.m-loading .process-line');
+
+        let loader = new PIXI.Loader();
+        loader
+            .add(this.formatImgList())
+            .add(this.formatJsonList())
+            .on('progress', (param) => {
+                // console.log(param.progress);
+                let prs = Math.ceil(param.progress);
+                progressEl.html(prs + '%');
+            })
+            .load(() => {
+                // console.log(PX.res);
+                progressWrapEl.fadeOut(200);
+                this.showIndex();
+            });
+    }
+
+    showIndex () {
+        // Video.initVideo();
+        this.beginCtn = PX.addCtn(PX.stage);
+
+        let beginBg = PX.addSprite(this.beginCtn, 'grid.jpg', 0, 0);
+        PX.hide(beginBg);
+        PX.show(beginBg, 0.3);
+
+        // $('.btn-turn').click((e) => {
+        //     if ($(e.target).hasClass('off')) {
+        //         Config.bgm.play();
+        //         $(e.target).removeClass('off');
+        //         Video.videoPlayer.muted = false;
+        //     } else {
+        //         Config.bgm.pause();
+        //         $(e.target).addClass('off');
+        //         Video.videoPlayer.muted = true;
+        //     }
+        // });
+    }
+
+    formatJsonList () {
+        let context = require.context('../../img/pixi_sprite_sheet/', false, /\.json/);
+        let loadDataPool2 = context.keys();
+        var list = [];
+        for (var i = 0; i < loadDataPool2.length; i++) {
+            let name = loadDataPool2[i].slice(2);
+            list.push(Config.imgPath + 'pixi_sprite_sheet/' + name);
+        }
+        return list;
+    }
+
+    formatImgList () {
+        let context = require.context('../../img/pixi/', true);
+        let Imglist = context.keys();
+        var list = [];
+        for (var i = 0; i < Imglist.length; i++) {
+            let name = Imglist[i].slice(2);
+            list.push({
+                name: name,
+                url: require('../../img/pixi/' + name)
+            });
+        }
+        return list;
     };
-*/
-    _private.init();
-};
 
-module.exports = LoadViewController;
+    hide () {
+        this.onHide && this.onHide();
+    }
+};
