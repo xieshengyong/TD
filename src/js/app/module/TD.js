@@ -382,8 +382,9 @@ TD.pad = (num, n) => {
  * 获取m~n的随机数
  * @param {Number} m
  * @param {Number} n
+ * @param {String} Integer 取整方向'floor' or 'ceil'，默认floor;
  */
-TD.getRandom = (m, n, Integer) => {
+TD.getRandom = (m, n, Integer = 'floor') => {
     return Math[Integer](Math.random() * (n - m) + m);
 };
 
@@ -451,6 +452,10 @@ TD.getCanvas = function (w, h) {
         canvas: canvas,
         ctx: ctx
     };
+};
+
+TD.abcde = function () {
+    console.log(1);
 };
 
 // 事件统计

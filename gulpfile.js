@@ -2,7 +2,7 @@
  * @Author: xieshengyong
  * @Date: 2019-06-18 11:35:03
  * @Last Modified by: xieshengyong
- * @Last Modified time: 2019-12-30 15:18:55
+ * @Last Modified time: 2020-03-25 16:36:22
  */
 /* eslint-disable no-unused-vars */
 const {
@@ -146,19 +146,19 @@ const copyjscss = series(
             outputDir + 'ossweb-img/' + 'cocos2d-js-min**.js',
             outputDir + 'ossweb-img/' + 'main**.js',
             outputDir + 'ossweb-img/' + 'src/project**.js',
-            outputDir + 'ossweb-img/' + 'src/settings**.js',
+            outputDir + 'ossweb-img/' + 'src/settings**.js'
         ])
         .pipe(vinylPaths(del))
         .pipe(dest(outputDir + 'js/'));
     }, function () {
         return src([
-            outputDir + 'ossweb-img/' + 'src/assets/script/utils/howler.min**.js',
+            outputDir + 'ossweb-img/' + 'src/assets/script/utils/howler.min**.js'
         ])
         .pipe(vinylPaths(del))
         .pipe(dest(outputDir + 'js/assets/script/utils/'));
     }, function () {
         return src([
-            outputDir + 'ossweb-img/' + 'main**.css',
+            outputDir + 'ossweb-img/' + 'main**.css'
         ])
         .pipe(vinylPaths(del))
         .pipe(dest(outputDir + 'css/'));

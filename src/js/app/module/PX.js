@@ -4,24 +4,14 @@
  *
  * 2、 防止IOS序列帧动画抖动， 判读为IOS时PIXI.settings.PRECISION_FRAGMENT = PIXI.PRECISION.HIGH;
  *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
  */
 import * as PIXI from 'pixi.js';
 import { gsap } from 'gsap';
 
 const res = PIXI.utils.TextureCache; // eslint-disable-line
 
-export default class PX {
-    static init () {
+export default {
+    init () {
         var app = new PIXI.Application({
             width: 750,
             height: 1600,
@@ -49,33 +39,33 @@ export default class PX {
             }
         };
         this.app.ticker.add(getDOMRect, this);
-    }
+    },
 
-    static addCtn (parent, interactive) {
+    addCtn (parent, interactive) {
         let ctn = new PIXI.Container();
         interactive && (ctn.interactive = true);
         parent.addChild(ctn);
         return ctn;
-    }
+    },
 
-    static addSprite (parent, cacheName, x, y, interactive) {
+    addSprite (parent, cacheName, x, y, interactive) {
         let sprite = new PIXI.Sprite(res[cacheName]);
         sprite.position.set(x, y);
         interactive && (sprite.interactive = true);
         parent.addChild(sprite);
         return sprite;
-    }
+    },
 
-    static addRect (parent, x, y, w, h, interactive, alpha, tint) {
+    addRect (parent, x, y, w, h, interactive, alpha, tint) {
         let rect = new PIXI.Graphics();
         rect.beginFill(tint || 0xFFFFFF, alpha || 0);
         rect.drawRect(x, y, w, h);
         interactive && (rect.interactive = true);
         parent.addChild(rect);
         return rect;
-    }
+    },
 
-    static addAnimation (parent, preName, fixName, num, x, y, speed) {
+    addAnimation (parent, preName, fixName, num, x, y, speed) {
         var aniFrames = [];
 
         for (var i = 0; i < num; i++) {
@@ -91,9 +81,9 @@ export default class PX {
         parent.addChild(anim);
 
         return anim;
-    }
+    },
 
-    static addText (parent, text, x, y, fontSize, tint, align, fontWeight) {
+    addText (parent, text, x, y, fontSize, tint, align, fontWeight) {
         let textS = new PIXI.Text(text, {
             fontSize: fontSize,
             fill: tint,
@@ -105,9 +95,9 @@ export default class PX {
         parent.addChild(textS);
 
         return textS;
-    }
+    },
 
-    static show (target, duration, callback, delay) {
+    show (target, duration, callback, delay) {
         if (target instanceof Array) {
             target.forEach(ele => {
                 ele.alpha = 0;
@@ -125,9 +115,9 @@ export default class PX {
                 callback && callback();
             }
         });
-    }
+    },
 
-    static hide (target, duration, callback, delay) {
+    hide (target, duration, callback, delay) {
         gsap.to(target, duration || 0, {
             alpha: 0,
             delay: delay || 0,
@@ -137,13 +127,13 @@ export default class PX {
                 callback && callback();
             }
         });
-    }
+    },
 
-    static setWidget (target, top, right, bottom, left) {
+    setWidget (target, top, right, bottom, left) {
         this._setWidget([target, top, right, bottom, left]);
-    }
+    },
 
-    static _setWidget (param) {
+    _setWidget (param) {
         const set = (para) => {
             let target = para[0];
             para[1] && (target.y = -this.DOMRect.top * this.domStageRatio + para[1]);
@@ -161,30 +151,5 @@ export default class PX {
                 set(ele);
             });
         }
-    }
-
-    /**
-     * 补位
-     * @param {*} num
-     * @param {*} n
-     */
-    static pad (num, n) {
-        let tbl = [];
-        n = n || 5;
-        let len = n - num.toString().length;
-        if (len <= 0) return num;
-        if (!tbl[len]) tbl[len] = (new Array(len + 1)).join('0');
-        return tbl[len] + num;
-    }
-
-    /**
-     * 获取m~n的随机数
-     * @param {Number} m
-     * @param {Number} n
-     * @param {Number} fly 是否向下取整
-     */
-    static getRandom (m, n, fly) {
-        let rdm = Math.random() * (n - m) + m;
-        return fly ? Math.floor(rdm) : rdm;
     }
 };
