@@ -12,27 +12,28 @@ export const LoadViewController = {
         this.load();
     },
 
-    load () {
+    async load () {
         if (this.isLoaded) return;
 
         let loader = new Loader();
         loader
             .add(formatImgList(require.context('../../img/', false).keys()), '')
+            // .add(formatImgList(require.context('../../img/2/', false).keys()), '')
             .load();
 
         loader.onProgress.add((param) => {
             let prs = Math.ceil(param.progress);
             // loadProgress.html(prs + '%');
-            console.log(prs);
+            // console.log(prs);
         });
 
         loader.onComplete.add(() => {
             this.isLoaded = true;
 
-            this.onLoad && this.onLoad();
+            // this.onLoad && this.onLoad();
         });
 
-        this.init();
+        // this.init();
     },
 
     // 图形剪切
@@ -117,6 +118,8 @@ export const LoadViewController = {
     },
 
     init () {
+        // http://species-in-pieces.com/#
+
         // let a = require('./cs2.json');
         // let aaa = this.clip2Signle(a['a']);
         // let aaa = this.hollow(a['a']);
@@ -128,33 +131,39 @@ export const LoadViewController = {
 
         // console.log(this.clipSignleGraphics(require('./cs2.json')['a'], true));
         // $('.m-end').css('clip-path', 'polygon(' + this.clipSignleGraphics(require('./cs2.json')['t2'], true) + ')');
-        $('.m-end').css('clip-path', 'polygon(' + this.clipSignleGraphics(require('./cs2.json')['t2'], true, true) + ')');
+        // $('.m-end').css('clip-path', 'polygon(' + this.clipSignleGraphics(require('./cs2.json')['t2'], true, true) + ')');
 
-        // for (let index = 0; index < 33; index++) {
-        //     let div = $('<div class="idx-' + index + '"></div>');
-        //     div.css('background-color', getRandomColor());
-        //     $('.m-loading').append(div);
-        // }
+        for (let index = 0; index < 33; index++) {
+            let div = $('<div class="idx-' + index + '"></div>');
+            div.css('background-color', getRandomColor());
+            $('.m-loading').append(div);
+        }
 
-        // const showAnimal = (data, name) => {
-        //     let divall = $('.m-loading div');
-        //     for (let index = 32; index >= 0; index--) {
-        //         setTimeout(() => {
-        //             let div = divall.eq(index);
-        //             div.css('clip-path', 'polygon(' + this.clipSignleGraphics(data[name + pad(index, 5)]) + ')');
-        //         }, index * 20);
-        //     }
-        // };
+        const showAnimal = (data, name) => {
+            let divall = $('.m-loading div');
+            for (let index = 32; index >= 0; index--) {
+                setTimeout(() => {
+                    let div = divall.eq(index);
+                    div.css('clip-path', 'polygon(' + this.clipSignleGraphics(data[name + pad(index, 5)]) + ')');
+                }, index * 20);
+            }
+        };
 
-        // let ani2 = require('./ani2.json');
-        // let ani3 = require('./ani3.json');
-        // showAnimal(ani3, 'ani3_');
+        let ani1 = require('./ani1.json');
+        let ani2 = require('./ani2.json');
+        let ani3 = require('./ani3.json');
+        showAnimal(ani1, 'ani_');
+        let aniPool = [
+            [ani1, 'ani_'],
+            [ani2, 'ani2_'],
+            [ani3, 'ani3_']
+        ];
 
-        // let isNext = !false;
-        // $('body').click(() => {
-        //     isNext ? showAnimal(ani2, 'ani2_') : showAnimal(ani3, 'ani3_');
-        //     isNext = !isNext;
-        // });
+        let i = 0;
+        $('body').click(() => {
+            i = i > 1 ? 0 : i + 1;
+            showAnimal(aniPool[i][0], aniPool[i][1]);
+        });
     }
 };
 
@@ -210,3 +219,42 @@ export const LoadViewController = {
 var getRandomColor = function () {
     return '#' + ('00000' + (Math.random() * 0x1000000 << 0).toString(16)).substr(-6);
 };
+
+function getImageColor (canvas, img, opacity = 255) {
+    canvas.width = img.width;
+    canvas.height = img.height;
+
+    var context = canvas.getContext('2d');
+
+    context.drawImage(img, 0, 0);
+
+    // 获取像素数据
+    var data = context.getImageData(0, 0, img.width, img.height).data;
+    // eslint-disable-next-line one-var
+    let r = 0, g = 0, b = 0;
+    let allNum = 0;
+
+    // 取所有像素的平均值
+    for (var row = 0; row < img.height; row++) {
+        for (var col = 0; col < img.width; col++) {
+            if (data[((img.width * row) + col) * 4 + 3] >= opacity) {
+                allNum++;
+                r += data[((img.width * row) + col) * 4];
+                g += data[((img.width * row) + col) * 4 + 1];
+                b += data[((img.width * row) + col) * 4 + 2];
+            }
+        }
+    }
+
+    // 求取平均值
+    r /= allNum;
+    g /= allNum;
+    b /= allNum;
+
+    // 将最终的值取整
+    r = Math.round(r);
+    g = Math.round(g);
+    b = Math.round(b);
+
+    return 'rgb(' + r + ',' + g + ',' + b + ')';
+}

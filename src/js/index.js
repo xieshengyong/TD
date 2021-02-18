@@ -8,21 +8,35 @@
 import '../less/style.less';
 
 // 引入的包根据实际情况而定
-import {LoadViewController} from './app/LoadViewController';
-import {IndexViewController} from './app/IndexViewController';
+// import { LoadViewController } from './app/LoadViewController';
+import { InPicesDemo } from './app/InPicesDemo';
+import { PathTranslationDemo } from './app/PathTranslationDemo';
+// import {IndexViewController} from './app/IndexViewController';
 
-var Router = {
-    // load页面
-    loadPageBack () {
-        LoadViewController.show();
+// var Router = {
+//     // load页面
+//     loadPageBack () {
+//         LoadViewController.show();
 
-        LoadViewController.onHide = () => this.choosePageBack();
-    },
+//         LoadViewController.onHide = () => this.choosePageBack();
+//     },
 
-    // index页面
-    indexPageBack () {
-        IndexViewController.show();
-    }
-};
+//     // index页面
+//     indexPageBack () {
+//         IndexViewController.show();
+//     }
+// };
 
-Router.loadPageBack();
+// Router.loadPageBack();
+
+// InPicesDemo.show();
+PathTranslationDemo.show();
+$('.demo1').click(() => {
+    InPicesDemo.show();
+    PathTranslationDemo.hide();
+});
+
+$('.demo2').click(() => {
+    InPicesDemo.hide();
+    PathTranslationDemo.show();
+});

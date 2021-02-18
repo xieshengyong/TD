@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+
+<body>
+    <canvas id="canvas" style="border:1px solid #aaa;display:block;margin:1px auto;"></canvas>
+    <div>
+        <fieldset>
+            <legend>多边形</legend>
+            离散点的个数<input type="text" id="num" value="10">
+            <input type="button" value="生成离散点集凸包" onclick="drawPolygon();" />
+        </fieldset>
+    </div>
+
+    <script>
+        let pointPool = [];
+        let img = new Image();
+        img.onload = function () {
+            let canvas = document.createElement('canvas');
+            let ctx = canvas.getContext("2d");
+            canvas.width = img.width;
+            canvas.height = img.height;
+            ctx.drawImage(img, 0, 0);
+            document.body.append(canvas);
+            let point = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+            for (let index = 0; index < point.length; index+=4) {
+                const element = point[index + 3];
+                if (element > 127) {
+                    pointPool.push(new Point(index / 4 % 750, index / 4 / 750 | 0, 0.1))
+                }
+            }
+
+            console.log('pointPool :>> ', pointPool);
+
+            // let newPoll = [];
+            let first = pointPool[0];
+            let end = pointPool[pointPool.length - 1];
+            let midR = first;
+            let midL = first;
+            let mid;
+            pointPool.forEach(element => {
+                if (element.x < midL.x) {
+                    midL = element;
+                }
+                if (element.x > midR.x) {
+                    midR = element;
+                }
+            });
+            console.log(midL, midR);
+            if (midL.x !== first.x && midL.y !== first.y) {
+                mid = midL
+            } else {
+                mid = midR
+            }
+            pointPool = [first, midR, end];
+            console.log('pointPool :>> ', pointPool);
+        }
+        img.crossOrigin = 'anonymous'
+        img.src = './src/img/1/ani_00000.png'
+    </script>
+    
+    <script type="text/javascript">
+        //画布定义（全局变量）
+        var canvas = document.getElementById("canvas");
+        canvas.width = 750;
+        canvas.height = 525;
+        var context = canvas.getContext("2d");
+
+        //绘制多边形
+        function drawPolygon() {
+            //重新生成n个随机点时清空画布
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            //离散点的个数
+            var n = document.getElementById("num").value;
+            //离散点集
+            // var discretePointArray = getDiscretePointSet(n);
+            discretePointArray = pointPool;
+            //绘制离散点集
+            discretePointArray.draw();
+            //获取基点
+            var basePoint = getBasePoint(discretePointArray);
+
+            //余弦值从大到小排序，基点会直接排在第一个
+            discretePointArray = quickSort(basePoint, discretePointArray, 0, discretePointArray.length - 1);
+
+
+            //获取离散点集凸多边形顶点
+            var polygonVertexSet = getPolygonVertexSet(discretePointArray);
+            //        for (var i = 0; i < polygonVertexSet.length; i++) {
+            //            alert(polygonVertexSet[i].x + "," + polygonVertexSet[i].y);
+            //        }
+
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            polygonVertexSet.draw();
+
+            //绘制多边形
+            for (var i = 0; i < polygonVertexSet.length; i++) {
+                if (i == polygonVertexSet.length - 1) {
+                    new Vector(polygonVertexSet[i], polygonVertexSet[0]).draw();
+                } else {
+                    new Vector(polygonVertexSet[i], polygonVertexSet[i + 1]).draw();
+                }
+
+            }
+        }
+
+        /**
+         * 获取离散点集凸包
+         * @param cosArr 排序后的离散点集
+         * @returns {Array}
+         */
+        function getPolygonVertexSet(cosArr) {
+            //凸包点集数组
+            var polygonArr = [];
+            //开始获取（按逆时针扫描，如果排序时升序则需要顺时针扫描）
+            if (cosArr != null && cosArr.length > 0) {
+                polygonArr.push(cosArr[0]); //基点肯定是多边形顶点
+                if (cosArr.length > 1) {
+                    polygonArr.push(cosArr[1]); //第一个夹角最小的点肯定是多边形顶点
+                }
+                if (cosArr.length > 2) {
+                    polygonArr.push(cosArr[2]); //无论是否是多边形顶点直接放入（回溯中可能会被删除）
+                }
+                for (var i = 3; i < cosArr.length; i++) {
+                    var len = polygonArr.length;
+                    var leftVector = new Vector(polygonArr[len - 2], polygonArr[len - 1]);
+                    var rightVector = new Vector(polygonArr[len - 1], cosArr[i]);
+                    while (leftVector.cross(rightVector) < 0) {//向量叉积小于0时回溯
+                        polygonArr.splice(len - 1, 1);//删除最后一个元素
+                        len = polygonArr.length;    //删除后，len有变化，需要重新设置
+                        leftVector = new Vector(polygonArr[len - 2], polygonArr[len - 1]);
+                        rightVector = new Vector(polygonArr[len - 1], cosArr[i]);
+                    }
+                    polygonArr.push(cosArr[i]);
+                }
+            }
+
+            return polygonArr;
+        }
+
+
+        /**
+         * 平面点对象
+         * @param x 点横坐标
+         * @param y 点纵坐标
+         * @param r 绘图时点的半径大小
+         * @constructor
+         */
+        function Point(x, y, r) {
+            this.x = x;
+            this.y = y;
+            this.r = r;
+            //绘制点
+            this.draw = function () {
+                var startAngle = 0 * Math.PI; //实心点的开始弧度
+                var endAngle = 2 * Math.PI; //实心点的结束弧度
+                //开始绘制实心点
+                context.beginPath();
+                context.arc(this.x, this.y, this.r, startAngle, endAngle);
+                context.fillStyle = "rgba(255,0,255,.8)";
+                context.fill();
+                context.closePath();
+            }
+        }
+
+        /**
+         * 平面向量对象
+         * @param start 向量始点
+         * @param end 向量终点
+         * @constructor
+         */
+        function Vector(start, end) {
+            this.start = start;
+            this.end = end;
+            // 向量坐标
+            this.x = this.end.x - this.start.x;
+            this.y = this.end.y - this.start.y;
+            // 向量与x轴正向的夹角余弦值
+            // 零向量(0,0)与x轴正向的夹角余弦值定义为2,按余弦值降序排序时排在第一个位置
+            this.cosx = (this.x == 0 && this.y == 0) ? 2
+                : (this.x / Math.sqrt(this.x * this.x + this.y * this.y));
+            // 向量叉积
+            this.cross = function (that) {
+                var result = this.x * that.y - that.x * this.y;
+
+                return result;
+            }
+            //绘制向量
+            this.draw = function () {
+                context.moveTo(this.start.x, this.start.y);       //设置起点状态
+                context.lineTo(this.end.x, this.end.y);       //设置末端状态
+                context.lineWidth = 1;          //设置线宽状态
+                context.strokeStyle = "red";  //设置线的颜色状态
+                context.stroke();               //进行绘制
+            }
+        }
+
+        /**
+         * 获取基点：在离散点集中选取y坐标最小的点，当作开始点
+         * 如果存在多个点的y坐标都为最小值，则选取x坐标最小的一点
+         * @param vertexSet 离散点集
+         * @returns {*}
+         */
+        function getBasePoint(vertexSet) {
+            if (vertexSet != null && vertexSet.length > 0) {
+                var point = vertexSet[0];
+                for (var i = 1; i < vertexSet.length; i++) {
+                    //最小y（多个y相同时，选择x最小的点）
+                    if (vertexSet[i].y < point.y ||
+                        ((vertexSet[i].y == point.y) && (vertexSet[i].x < point.x))) {
+                        point = vertexSet[i];
+                    }
+                }
+
+                return point;
+            }
+
+            return null;
+        }
+
+        /**
+         * 随机生成一个离散点
+         * @returns {Point} 生成的离散点
+         */
+        function createRandomPoint() {
+            var r = 3;
+            //横坐标
+            var x = Math.random() * (canvas.width - 2 * r) + r;
+            //纵坐标
+            var y = Math.random() * (canvas.height - 2 * r) + r;
+            //        x = Math.floor(x);
+            //        y = Math.floor(y);
+
+            return new Point(x, y, r);
+        }
+
+
+        /**
+         * 随机生成n个不重合的离散点
+         * @param n 离散点的个数
+         * @returns {Array} 离散点集
+         */
+        function getDiscretePointSet(n) {
+            var vertexArray = [];
+            if (n != null && n > 0) {
+                for (var i = 0; i < n; i++) {
+                    var point = createRandomPoint(); //离散点
+                    //离散点不能有重合，重合点需要重新生成
+                    for (var j = 0; j < vertexArray.length; j++) {
+                        //注：此处理论上会出现死循环
+                        while ((point.x == vertexArray[j].x) && (point.y == vertexArray[j].y)) {
+                            point = createRandomPoint();
+                            j = 0; //重新生成点后从头开始新一轮比较
+                        }
+                    }
+                    vertexArray.push(point);
+                }
+            }
+
+            return vertexArray;
+        }
+
+        /**
+         * 对离散点排序：按照其与基点构成的向量与x轴正方向夹角余弦值快速降序
+         * @param basePoint 基点
+         * @param discretePointArray 需要排序的离散点集
+         * @param left 左指示变量
+         * @param right 右指示变量
+         * @returns {*}
+         */
+        function quickSort(basePoint, discretePointArray, left, right) {
+            var i = left;
+            var j = right;
+            var temp = discretePointArray[left];
+            var tempV = new Vector(basePoint, temp);
+            while (i < j) {
+                while (i < j && tempV.cosx > new Vector(basePoint, discretePointArray[j]).cosx) {
+                    j--;
+                }
+                if (i < j) {
+                    discretePointArray[i++] = discretePointArray[j];
+                }
+                while (i < j && tempV.cosx < new Vector(basePoint, discretePointArray[i]).cosx) {
+                    i++;
+                }
+                if (i < j) {
+                    discretePointArray[j--] = discretePointArray[i];
+                }
+            }
+            discretePointArray[i] = temp;
+            if (left < i) {
+                quickSort(basePoint, discretePointArray, left, i - 1);
+            }
+            if (right > i) {
+                quickSort(basePoint, discretePointArray, i + 1, right);
+            }
+
+            return discretePointArray;
+        }
+
+        /**
+         * 扩展Array方法：绘制整个点集
+         */
+        Array.prototype.draw = function () {
+            if (this.length > 0) {
+                for (var i = 0; i < this.length; i++) {
+                    if (this[i] instanceof Point) {
+                        this[i].draw();
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

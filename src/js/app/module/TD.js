@@ -595,10 +595,10 @@ TD.getCanvas = function (w, h) {
     canvas.width = w;
     canvas.height = h;
     let ctx = canvas.getContext('2d');
-    return {
-        canvas: canvas,
-        ctx: ctx
-    };
+    return [
+        canvas,
+        ctx
+    ];
 };
 
 /** 废弃 */

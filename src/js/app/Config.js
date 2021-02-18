@@ -5,7 +5,7 @@ export const Config = {
         desc: '分享描述',
         link: location.href,
         // 分享配图
-        img: this.imgPath + 'share.jpg',
+        // img: this.imgPath + 'share.jpg',
         // 项目名，数据查询时候用
         proj: 'streetgame',
         // 填写公众号绑定的appid
@@ -20,7 +20,8 @@ export function formatImgList (Imglist, path) {
         let name = Imglist[i].slice(2);
         list.push({
             name: name,
-            url: require('../../img/' + (path || '') + name)
+            // url: require('../../img/' + (path || '') + name)
+            url: require('../../img/2/' + (path || '') + name)
         });
     }
     return list;

@@ -27,9 +27,9 @@
         docEl.style.fontSize = (resultValue > 110 ? 110 : resultValue) + 'px';
 
         // 老年模式，兼容微信右上字体调节, 不支持动态调节；
-        var htmlFontSize = parseFloat(window.getComputedStyle(html).fontSize).toFixed(2);
+        var htmlFontSize = parseFloat(window.getComputedStyle(docEl).fontSize).toFixed(2);
         if (htmlFontSize !== resultValue) {
-            html.style.fontSize = (resultValue / (htmlFontSize / resultValue)).toFixed(2) + 'px';
+            docEl.style.fontSize = (resultValue / (htmlFontSize / resultValue)).toFixed(2) + 'px';
         }
     };
     reCalc();
